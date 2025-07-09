@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Light theme (default) */
+      --background: #ffffff;
+      --foreground: #0f172a;
+      --card: #ffffff;
+      --card-foreground: #0f172a;
+      --primary: #0f172a;
+      --primary-foreground: #f8fafc;
+      --secondary: #f1f5f9;
+      --secondary-foreground: #0f172a;
+      --muted: #f1f5f9;
+      --muted-foreground: #64748b;
+      --accent: #f1f5f9;
+      --accent-foreground: #0f172a;
+      --destructive: #ef4444;
+      --destructive-foreground: #f8fafc;
+      --border: #e2e8f0;
+      --input: #e2e8f0;
+      --ring: #0f172a;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --radius: 0.5rem;
+      --font-sans: 'Architects Daughter', sans-serif;
+      --font-serif: 'Poppins', sans-serif;
+      --font-mono: 'Roboto Mono', monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #0f172a;
+        --foreground: #f8fafc;
+        --card: #0f172a;
+        --card-foreground: #f8fafc;
+        --primary: #f8fafc;
+        --primary-foreground: #0f172a;
+        --secondary: #1e293b;
+        --secondary-foreground: #f8fafc;
+        --muted: #1e293b;
+        --muted-foreground: #94a3b8;
+        --accent: #1e293b;
+        --accent-foreground: #f8fafc;
+        --destructive: #ef4444;
+        --destructive-foreground: #f8fafc;
+        --border: #1e293b;
+        --input: #1e293b;
+        --ring: #f8fafc;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 420px;
+      min-height: 520px;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-sans);
+      background: linear-gradient(135deg, var(--background) 0%, var(--muted) 100%);
+      color: var(--foreground);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .container {
+      padding: 24px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--border);
+      background: var(--card);
+      margin: -24px -24px 24px -24px;
+      padding: 20px 24px 16px 24px;
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+
+    .header h3 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--foreground);
+      font-family: var(--font-serif);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 6px 12px;
+      border-radius: calc(var(--radius) - 2px);
+      font-size: 12px;
+      font-family: var(--font-serif);
+      font-weight: 500;
+    }
+
+    .status-bar.online {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .status-bar.offline {
+      background: rgba(239, 68, 68, 0.1);
+      color: var(--destructive);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .status-bar.checking {
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--warning);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--foreground);
+      font-family: var(--font-serif);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 14px;
+      background-color: var(--background);
+      color: var(--foreground);
+      font-family: var(--font-sans);
+      transition: all 0.2s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--ring);
+      box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
+    }
+
+    input:disabled, select:disabled, textarea:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+      font-family: var(--font-sans);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px 18px;
+      background: var(--primary);
+      color: var(--primary-foreground);
+      border: none;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      font-family: var(--font-serif);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    button:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .button-secondary {
+      background: var(--secondary);
+      color: var(--secondary-foreground);
+    }
+
+    .message {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      text-align: center;
+      font-family: var(--font-sans);
+      display: none;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message.error {
+      background: rgba(239, 68, 68, 0.1);
+      color: var(--destructive);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .message.success {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .message.info {
+      background: var(--muted);
+      color: var(--muted-foreground);
+      border: 1px solid var(--border);
+    }
+
+    .login-prompt {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .login-prompt p {
+      margin-bottom: 24px;
+      color: var(--muted-foreground);
+      line-height: 1.6;
+      font-family: var(--font-sans);
+    }
+
+    .loading {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--primary-foreground);
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .url-preview {
+      font-size: 11px;
+      color: var(--muted-foreground);
+      background: var(--muted);
+      padding: 8px 10px;
+      border-radius: calc(var(--radius) - 2px);
+      margin-top: 6px;
+      word-break: break-all;
+      max-height: 60px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+    }
+
+    .tag-input-help {
+      font-size: 11px;
+      color: var(--muted-foreground);
+      margin-top: 4px;
+      font-family: var(--font-sans);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .form-actions button {
+      flex: 1;
+    }
+
+    .icon {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--muted);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--muted-foreground);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--foreground);
+    }
+
+    .pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h3>
+        <span class="icon">📚</span>
+        Link Library
+      </h3>
+      <div id="statusBar" class="status-bar checking">
+        <div class="loading"></div>
+        <span>Checking connection...</span>
+      </div>
+    </div>
+
+    <div id="loginPrompt" style="display: none;">
+      <div class="login-prompt">
+        <p>Please log in to your Link Library account to save links.</p>
+        <button id="loginButton" class="button-secondary">
+          <span class="icon">🔐</span>
+          Open Link Library & Login
+        </button>
+      </div>
+    </div>
+
+    <div id="saveForm" style="display: none;">
+      <form id="linkForm">
+        <div class="form-group">
+          <label for="title">
+            <span class="icon">📝</span>
+            Title *
+          </label>
+          <input type="text" id="title" required placeholder="Enter a title for this link">
+        </div>
+
+        <div class="form-group">
+          <label for="url">
+            <span class="icon">🔗</span>
+            URL *
+          </label>
+          <input type="url" id="url" required readonly>
+          <div id="urlPreview" class="url-preview"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="library">
+            <span class="icon">📁</span>
+            Save to Library *
+          </label>
+          <select id="library" required>
+            <option value="">Choose a library...</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="description">
+            <span class="icon">📄</span>
+            Description (Optional)
+          </label>
+          <textarea id="description" placeholder="Add a description or notes about this link"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="tags">
+            <span class="icon">🏷️</span>
+            Tags (Optional)
+          </label>
+          <input type="text" id="tags" placeholder="web, development, tutorial">
+          <div class="tag-input-help">Separate tags with commas</div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="cancelButton" class="button-secondary">
+            Cancel
+          </button>
+          <button type="submit" id="saveButton">
+            <span id="buttonIcon" class="icon">💾</span>
+            <span id="buttonText">Save Link</span>
+          </button>
+        </div>
+        
+        <div id="message" class="message"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

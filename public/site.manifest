@@ -1,0 +1,26 @@
+{
+  "name": "Libry",
+  "short_name": "LinkLib",
+  "description": "Organize and manage your web links in custom libraries",
+  "icons": [
+    {
+      "src": "/logo-favicon.png",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#0f172a",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/"
+}

@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 93.3333%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 93.3333%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 0 0% 20%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 66.6667%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 80%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 0 0% 66.6667%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 100% 26.6667%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 0%;
+    --input: 0 0% 86.6667%;
+    --ring: 0 0% 0%;
+    --chart-1: 0 0% 0%;
+    --chart-2: 0 0% 6.6667%;
+    --chart-3: 0 0% 13.3333%;
+    --chart-4: 0 0% 20%;
+    --chart-5: 0 0% 26.6667%;
+    --sidebar: 0 0% 94.9020%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 0 0% 20%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 66.6667%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 0 0% 0%;
+    --sidebar-ring: 0 0% 0%;
+    --font-sans: Architects Daughter, sans-serif;
+    --font-serif: Poppins, sans-serif;
+    --font-mono: Roboto Mono, monospace;
+    --radius: 0rem;
+    --shadow-2xs: 3px 3px 0px 0px hsl(0 0% 0% / 0.25);
+    --shadow-xs: 3px 3px 0px 0px hsl(0 0% 0% / 0.25);
+    --shadow-sm: 3px 3px 0px 0px hsl(0 0% 0% / 0.50), 3px 1px 2px -1px hsl(0 0% 0% / 0.50);
+    --shadow: 3px 3px 0px 0px hsl(0 0% 0% / 0.50), 3px 1px 2px -1px hsl(0 0% 0% / 0.50);
+    --shadow-md: 3px 3px 0px 0px hsl(0 0% 0% / 0.50), 3px 2px 4px -1px hsl(0 0% 0% / 0.50);
+    --shadow-lg: 3px 3px 0px 0px hsl(0 0% 0% / 0.50), 3px 4px 6px -1px hsl(0 0% 0% / 0.50);
+    --shadow-xl: 3px 3px 0px 0px hsl(0 0% 0% / 0.50), 3px 8px 10px -1px hsl(0 0% 0% / 0.50);
+    --shadow-2xl: 3px 3px 0px 0px hsl(0 0% 0% / 1.25);
+    --tracking-normal: 0.02em;
+    --spacing: 0.25rem;
+  }
+  
+  .dark {
+    --background: 0 0% 6.6667%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 13.3333%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 13.3333%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 86.6667%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 33.3333%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 66.6667%;
+    --accent: 0 0% 26.6667%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 36.6667%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 100%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 100%;
+    --chart-1: 0 0% 100%;
+    --chart-2: 0 0% 93.3333%;
+    --chart-3: 0 0% 86.6667%;
+    --chart-4: 0 0% 80%;
+    --chart-5: 0 0% 73.3333%;
+    --sidebar: 0 0% 10.1961%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 86.6667%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 26.6667%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 100%;
+    --sidebar-ring: 0 0% 100%;
+    --font-sans: Architects Daughter, sans-serif;
+    --font-serif: Poppins, sans-serif;
+    --font-mono: Roboto Mono, monospace;
+    --radius: 0rem;
+    --shadow-2xs: 3px 3px 0px 0px hsl(0 0% 0% / 0.25);
+    --shadow-xs: 3px 3px 0px 0px hsl(0 0% 0% / 0.25);
+    --shadow-sm: 3px 3px 0px 0px hsl(0 0% 0% / 0.50), 3px 1px 2px -1px hsl(0 0% 0% / 0.50);
+    --shadow: 3px 3px 0px 0px hsl(0 0% 0% / 0.50), 3px 1px 2px -1px hsl(0 0% 0% / 0.50);
+    --shadow-md: 3px 3px 0px 0px hsl(0 0% 0% / 0.50), 3px 2px 4px -1px hsl(0 0% 0% / 0.50);
+    --shadow-lg: 3px 3px 0px 0px hsl(0 0% 0% / 0.50), 3px 4px 6px -1px hsl(0 0% 0% / 0.50);
+    --shadow-xl: 3px 3px 0px 0px hsl(0 0% 0% / 0.50), 3px 8px 10px -1px hsl(0 0% 0% / 0.50);
+    --shadow-2xl: 3px 3px 0px 0px hsl(0 0% 0% / 1.25);
+  }
+  
+  body {
+    letter-spacing: var(--tracking-normal);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
