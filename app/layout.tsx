@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   description: "Organize and manage your web links in custom libraries",
 }
 
+
 async function SignOutButton() {
   async function signOut() {
     "use server"
@@ -26,7 +27,9 @@ async function SignOutButton() {
     }
     // Force redirect to login with a flag to prevent auto-login
     redirect("/login?signed_out=true")
-  }
+  }   
+
+
 
   return (
     <form action={signOut}>
@@ -49,6 +52,22 @@ async function DashboardHeader() {
 
     if (sessionError || !session) {
       return null
+    }
+    const userName = session.user?.user_metadata.full_name || ""
+
+    // If session is invalid or expired, don't show the header
+    if (sessionError || !session) {
+      return null
+    }
+  
+    const currentHour = new Date().getHours()
+    let greeting
+    if (currentHour < 12) {
+      greeting = "Good morning"
+    } else if (currentHour < 18) {
+      greeting = "Good afternoon"
+    } else {
+      greeting = "Good evening"
     }
 
     return (
@@ -75,7 +94,7 @@ async function DashboardHeader() {
               </nav>
             </div>
             <div className="flex items-center space-x-4">
-              <span className="text-sm text-muted-foreground font-mono">{session.user.email}</span>
+              <span className="text-sm text-muted-foreground font-mono">{greeting},{userName }🖤</span>
               <SignOutButton />
             </div>
           </div>
