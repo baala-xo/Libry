@@ -14,22 +14,17 @@ export const metadata: Metadata = {
   description: "Organize and manage your web links in custom libraries",
 }
 
-
 async function SignOutButton() {
   async function signOut() {
     "use server"
     try {
       const supabase = await createServerClient()
-      // Clear the session completely
       await supabase.auth.signOut({ scope: "global" })
     } catch (error) {
       console.error("Error signing out:", error)
     }
-    // Force redirect to login with a flag to prevent auto-login
     redirect("/login?signed_out=true")
-  }   
-
-
+  }
 
   return (
     <form action={signOut}>
@@ -47,28 +42,20 @@ async function DashboardHeader() {
 
     const {
       data: { session },
-      error: sessionError,
+      error,
     } = await supabase.auth.getSession()
 
-    if (sessionError || !session) {
-      return null
-    }
-    const userName = session.user?.user_metadata.full_name || ""
+    if (error || !session) return null
 
-    // If session is invalid or expired, don't show the header
-    if (sessionError || !session) {
-      return null
-    }
-  
+    const userName = session.user?.user_metadata?.full_name || "User"
     const currentHour = new Date().getHours()
-    let greeting
-    if (currentHour < 12) {
-      greeting = "Good morning"
-    } else if (currentHour < 18) {
-      greeting = "Good afternoon"
-    } else {
-      greeting = "Good evening"
-    }
+
+    const greeting =
+      currentHour < 12
+        ? "Good morning"
+        : currentHour < 18
+        ? "Good afternoon"
+        : "Good evening"
 
     return (
       <header className="border-b border-border bg-background">
@@ -94,7 +81,9 @@ async function DashboardHeader() {
               </nav>
             </div>
             <div className="flex items-center space-x-4">
-              <span className="text-sm text-muted-foreground font-mono">{greeting},{userName }🖤</span>
+              <span className="text-sm text-muted-foreground font-mono">
+                {greeting}, {userName} 🖤
+              </span>
               <SignOutButton />
             </div>
           </div>
